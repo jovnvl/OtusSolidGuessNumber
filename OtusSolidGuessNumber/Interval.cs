@@ -13,5 +13,6 @@ namespace OtusSolidGuessNumber
             Min = min;
             Max = max;
         }
+        public Interval() { Min = 0; Max = 0; }
     }
 }

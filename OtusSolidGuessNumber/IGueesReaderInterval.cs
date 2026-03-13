@@ -4,8 +4,8 @@ using System.Text;
 
 namespace OtusSolidGuessNumber
 {
-    interface IGueesReader
+    interface IGueesReaderInterval
     {
-        int Get(Setting setting);
+        Interval Get(Interval interval);
     }
 }

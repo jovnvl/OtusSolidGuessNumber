@@ -8,21 +8,23 @@ namespace OtusSolidGuessNumber
 {
     class GameStore
     {
-        public IGueesReader Reader { get; set; }
+        public GueesReader Reader { get; set; }
+        public IGueesReaderInterval ReaderInterval { get; set; }
         public IGuessValidator Validator { get; set; }
         public IGueesGenerate Generate {  get; set; }
-        public GameStore(IGueesReader reader, IGuessValidator validator, IGueesGenerate generate)
+        public GameStore(GueesReader reader, IGueesReaderInterval readerInterval, IGuessValidator validator, IGueesGenerate generate)
         {
             Reader = reader;
             Validator = validator;
             Generate = generate;
+            ReaderInterval = readerInterval;
         }
         public void Executor()
         {
-            var _attempt = Reader.GetAttempt();
-            var _setting = Reader.GetInterval();
-            int _guessNumber = Generate.GenerationValue(_setting.Interval.Min, _setting.Interval.Max);
-            var _res = GameProcess(_attempt, _guessNumber, _setting);
+            var _attempt = Reader.Get(new GueesReaderAttempt());
+            var _interval = ReaderInterval.Get(Reader.Setting.Interval);
+            int _guessNumber = Generate.GenerationValue(_interval.Min, _interval.Max);
+            var _res = GameProcess(_attempt, _guessNumber, Reader.Setting);
             Console.WriteLine(_res);
             Console.ReadKey();
         }
@@ -37,7 +39,7 @@ namespace OtusSolidGuessNumber
                 _currentAttempt++;
                 Console.Write($"Попытка {_currentAttempt}.");
 
-                var _number = Reader.GetNumber();
+                var _number = Reader.Get(new GueesReaderNumber());
 
                 _result = Validator.IsValid(guessValue, _number, setting, out string currentRes);
                 Console.WriteLine(currentRes);
