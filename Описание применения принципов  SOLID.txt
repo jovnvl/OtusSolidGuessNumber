@@ -1,0 +1,42 @@
+Принцип единственной обязанности
+- класс Setting: настройки Interval и Attempt
+- класс Interval: Min, Max
+- базовый класс GueesReaderBase: единственный метод для ввода
+- класс наследник GueesReaderInterval: для ввода Interval
+- класс наследник GueesReaderNumber: для ввода number в пределах Interval
+- класс наследник GueesReader: для хранения Setting, Number
+- класс GueesValidator: единственный метод для проверки угадываемого числа
+- класс GueesGenerate: единственный метод для генерации случайного числа в заданных пределах
+- класс GueesReaderAttempt наследует GueesReaderBase, IGueesReader
+    имеет метод Get(Setting setting) - реализация для получения количества попыток
+	
+Принцип открытости/закрытости
+- класс GueesReader наследует GueesReaderBase
+    имеет метод Get(IGueesReader gueesReader) - реализация для получения числа
+- вызов Reader.Get(new GueesReaderNumber()) - вызов IGueesReader
+- вызов Reader.Get(new GueesReaderAttempt()) - тоже
+	
+Принцип подстановки Лисков
+- класс GueesReaderAttempt реализует IGueesReader метод Get
+используется в классе GameStore как var _attempt = Reader.Get(IGueesReader) - new GueesReaderAttempt()
+- класс GueesReaderNumber реализует IGueesReader метод Get
+используется в классе GameStore как var _number = Reader.Get(IGueesReader) - new GueesReaderNumber()
+
+Инверсия зависимостей
+- класс GameStore
+	public GueesReader Reader { get; set; }
+	public IGueesReaderInterval ReaderInterval { get; set; }
+	public IGuessValidator Validator { get; set; }
+	public IGueesGenerate Generate {  get; set; }
+	public GameStore(GueesReader reader, IGueesReaderInterval readerInterval, IGuessValidator validator, IGueesGenerate generate)
+	{
+		Reader = reader;
+		Validator = validator;
+		Generate = generate;
+		ReaderInterval = readerInterval;
+	}
+  вызов как GameStore _gameStore = new GameStore(new GueesReader(), new GueesReaderInterval(), new GueesValidator(), new GueesGenerate());0
+- класс GueesReader
+  public int Get(IGueesReader gueesReader)
+- вызов Reader.Get(new GueesReaderNumber()) - вызов IGueesReader
+- вызов Reader.Get(new GueesReaderAttempt()) - тоже
