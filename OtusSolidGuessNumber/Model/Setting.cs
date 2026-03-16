@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OtusSolidGuessNumber.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OtusSolidGuessNumber
+namespace OtusSolidGuessNumber.Model
 {
     class Setting : ISetting
     {

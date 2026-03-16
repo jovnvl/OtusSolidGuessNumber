@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OtusSolidGuessNumber
+namespace OtusSolidGuessNumber.Interface
 {
     interface IGueesGenerate
     {

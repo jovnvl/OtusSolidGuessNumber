@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using OtusSolidGuessNumber.Interface;
+using OtusSolidGuessNumber.Model;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;

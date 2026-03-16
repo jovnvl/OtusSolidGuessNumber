@@ -1,4 +1,6 @@
-﻿namespace OtusSolidGuessNumber
+﻿using OtusSolidGuessNumber.Model;
+
+namespace OtusSolidGuessNumber
 {
     class ProgramBad
     {
