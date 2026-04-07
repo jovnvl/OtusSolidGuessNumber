@@ -8,7 +8,7 @@ namespace OtusSolidGuessNumber
 {
     class GueesValidator: IGuessValidator
     {
-        public bool IsValid( int guess, int value, Setting setting, out string _result) 
+        public bool IsValid( int guess, int value, ISetting setting, out string _result) 
         {
             _result = string.Empty;
             bool _isResult = false;

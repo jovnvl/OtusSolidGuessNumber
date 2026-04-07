@@ -7,6 +7,6 @@ namespace OtusSolidGuessNumber.Interface
 {
     interface IGuessValidator
     {
-        bool IsValid(int guess, int value, Setting setting, out string result);
+        bool IsValid(int guess, int value, ISetting setting, out string result);
     }
 }
